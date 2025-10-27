@@ -1,0 +1,19 @@
+services:
+  nanochat:
+    image: nanochat/nanochat:latest
+    restart: no
+    build: .
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/kfd:/dev/kfd
+    group_add:
+      - video
+    security_opt:
+      - seccomp=unconfined
+    command:
+      - "./speedrun.sh"
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/nanochat
+      - /home/iancrosser/.cache/nanochat:/root/.cache/nanochat
